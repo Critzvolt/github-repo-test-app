@@ -1,4 +1,6 @@
 package critz.githubrepotest;
+import org.json.JSONObject;
+
 
 public class GitHubRepository {
 
@@ -18,5 +20,15 @@ public class GitHubRepository {
     public void setStargazers_count(Integer stargazers_count) {this.stargazers_count = stargazers_count;}
     public String getCreated_at() {return created_at;}
     public void setCreated_at(String created_at) {this.created_at = created_at;}
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("full_name", full_name);
+        json.put("description", description);
+        json.put("clone_url", clone_url);
+        json.put("stargazers_count", stargazers_count);
+        json.put("created_at", created_at);
+        return json;
+    }
 
 }
