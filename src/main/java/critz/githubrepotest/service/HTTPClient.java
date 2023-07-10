@@ -1,6 +1,8 @@
-package critz.githubrepotest;
+package critz.githubrepotest.service;
 
+import critz.githubrepotest.entity.HTTPResponse;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,23 +10,26 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class GitHubRepoContent {
+@Service
+public class HTTPClient implements IHTTPClient {
 
-    public static JSONObject getGitHubRepoContent(String urlString) throws Exception {
+    @Override
+    public HTTPResponse get(String urlString) throws Exception {
         URL url = new URL(urlString);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
         int responseCode = connection.getResponseCode();
+        JSONObject payload = new JSONObject();
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 String response = reader.lines().collect(Collectors.joining());
-                return new JSONObject(response);
+                payload = new JSONObject(response);
             }
-        } else {
-            throw new Exception("Failed to retrieve data. Response code: " + responseCode);
         }
+        connection.disconnect();
+        return new HTTPResponse(responseCode, payload);
     }
 }

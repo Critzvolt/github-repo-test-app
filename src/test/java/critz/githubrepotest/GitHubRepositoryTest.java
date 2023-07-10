@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.mockito.Mockito;
+import org.json.JSONObject;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,5 +42,23 @@ public class GitHubRepositoryTest {
         Mockito.verify(mockRepository).getClone_url();
         Mockito.verify(mockRepository).getStargazers_count();
         Mockito.verify(mockRepository).getCreated_at();*/
+    }
+
+    public void testNullResistance(){
+        String full_name = null;
+        String description = null;
+        String clone_url = null;
+        String stargazers_count = null;
+        String created_at = null;
+
+        JSONObject json = new JSONObject();
+        json.put("full_name", full_name);
+        json.put("description", description);
+        json.put("clone_url", clone_url);
+        json.put("stargazers_count", stargazers_count);
+        json.put("created_at", created_at);
+        //return json;
+
+        ReturnRepoInfo(istest true, testjson json);
     }
 }
