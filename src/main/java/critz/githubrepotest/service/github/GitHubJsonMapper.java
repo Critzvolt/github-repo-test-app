@@ -2,7 +2,7 @@ package critz.githubrepotest.service.github;
 
 import org.json.JSONObject;
 
-public class GithubJSONMapper {
+public class GitHubJsonMapper {
 
     public static JSONObject map (JSONObject source){
         JSONObject destination = new JSONObject();

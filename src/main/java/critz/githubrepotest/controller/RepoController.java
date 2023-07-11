@@ -2,7 +2,6 @@ package critz.githubrepotest.controller;
 
 import critz.githubrepotest.service.IGitService;
 
-import critz.githubrepotest.service.github.GithubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RepoController {
 
-    private IGitService gitService;
+    private final IGitService gitService;
 
     public RepoController(@Autowired IGitService gitService) {
         this.gitService = gitService;
