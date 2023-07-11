@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="critz.githubrepotest.GithubServiceTester" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-07-11T16:24:28" hostname="LAPTOP-8QUTBJNL" time="0.262">
-  <properties/>
-  <testcase name="getRepoInfo_ValidOwnerAndRepoName_ShouldReturnRepoInfo" classname="critz.githubrepotest.GithubServiceTester" time="0.261"/>
-  <testcase name="getRepoInfo_HTTPError_ShouldReturnErrorAndHTTPCode" classname="critz.githubrepotest.GithubServiceTester" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

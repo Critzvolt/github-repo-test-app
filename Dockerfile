@@ -1,16 +1,13 @@
-FROM openjdk:8-jdk-slim as runtime
-MAINTAINER Datawire <dev@datawire.io>
-LABEL PROJECT_REPO_URL         = "git@github.com:datawire/???.git" \
-      PROJECT_REPO_BROWSER_URL = "https://github.com/datawire/???" \
-      DESCRIPTION              = "Datawire Labs - Hello Spring Boot!" \
-      VENDOR                   = "Datawire, Inc." \
-      VENDOR_URL               = "https://datawire.io"
+FROM openjdk:8-jdk-slim as build
+MAINTAINER Krzysztof Lewandowski <mail@critz>
 
-ENV TERM=dumb
-
-WORKDIR /srv
+WORKDIR /src
 COPY    . .
 RUN     ./gradlew test build
 
+FROM openjdk:8-jdk-slim as runtime
+WORKDIR /app
+COPY --from=build /src/build/libs/github-repo-test-app-0.0.1-SNAPSHOT.jar .
+
 ENTRYPOINT ["java"]
-CMD ["-jar", "build/libs/hello-forge-springboot-0.0.1-SNAPSHOT.jar"]
+CMD ["-jar", "/app/github-repo-test-app-0.0.1-SNAPSHOT.jar"]
